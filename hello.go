@@ -30,6 +30,11 @@ func main() {
 
 	// Print the entire metadata response to inspect available fields
 	fmt.Printf("Dapr Metadata: %+v\n", metadata)
-	// Print the Dapr runtime version
-	fmt.Printf("Dapr Runtime Version: %s\n", metadata.ExtendedMetadata["daprRuntimeVersion"])
+	// try to retrieve and print the Dapr runtime version
+	if version, ok := metadata.ExtendedMetadata["daprRuntimeVersion"]; ok {
+		fmt.Printf("Dapr Runtime Version: %s\n", version)
+	} else {
+		fmt.Println("💥💥 Dapr runtime version not found in metadata")
+	}
+
 }
