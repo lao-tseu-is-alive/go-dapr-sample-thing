@@ -8,15 +8,17 @@ import (
 )
 
 func main() {
-	fmt.Printf("Starting hello world from Darp app")
-	err := os.Setenv("DAPR_CLIENT_TIMEOUT_SECONDS", "3")
+	fmt.Printf("Starting hello world from Darp app\n")
+	err := os.Setenv("DAPR_CLIENT_TIMEOUT_SECONDS", "2")
 	if err != nil {
 		fmt.Printf("💥💥 error setting DAPR_CLIENT_TIMEOUT_SECONDS environment variable: %s", err)
 		os.Exit(1)
 	}
 	client, err := dapr.NewClient()
 	if err != nil {
-		fmt.Printf("💥💥 error creating Dapr client: %s", err)
+		fmt.Printf("💥💥 error creating Dapr client: %s\n", err)
+		fmt.Println("Did you run the Dapr side car in another console window ?")
+		fmt.Println("dapr run --app-id myapp --app-port 8080 --dapr-http-port 3500 --dapr-grpc-port 50001")
 		os.Exit(1)
 	}
 	defer client.Close()
